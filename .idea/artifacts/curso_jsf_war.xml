@@ -7,7 +7,7 @@
         <packaging>war</packaging>
       </options>
     </properties>
-    <root id="archive" name="${project.artifactId}-${project.version}.war">
+    <root id="archive" name="curso_jsf-1.0-SNAPSHOT.war">
       <element id="artifact" artifact-name="curso_jsf:war exploded" />
     </root>
   </artifact>
