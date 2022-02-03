@@ -12,4 +12,5 @@ import java.io.Serializable;
 public abstract class ServicoComum<T, ID extends Serializable> {
 
     public abstract GenericDAO<T, ID> getEntidadeDAO();
+
 }

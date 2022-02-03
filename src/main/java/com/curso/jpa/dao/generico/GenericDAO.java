@@ -50,6 +50,7 @@ public abstract class GenericDAO<T, ID extends Serializable>{
         return getEntityManager().getDelegate();
     }
 
+
     /**
      * Conectando ao banco de dados diretamente pelo JNDI
      */

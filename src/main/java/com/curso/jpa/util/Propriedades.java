@@ -73,6 +73,7 @@ public class Propriedades {
         return getMensagem(mensagem, args);
     }
 
+
     public static String getMensagem(String mensagem, Object[] args)
     {
         try

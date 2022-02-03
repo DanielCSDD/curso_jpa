@@ -16,4 +16,5 @@ public class AppException extends Exception{
     public AppException(String str, Throwable thro){
         super(str, thro);
     }
+
 }
