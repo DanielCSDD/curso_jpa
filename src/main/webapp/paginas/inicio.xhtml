@@ -11,8 +11,11 @@
     </ui:define>
 
     <ui:define name="content">
+        <f:metadata>
+            <f:event type="preRenderView" listener="#{beanTeste.init}"/>
+        </f:metadata>
         <h:form>
-
+            Olá Sistema!!
         </h:form>
     </ui:define>
 </ui:composition>

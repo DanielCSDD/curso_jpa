@@ -10,9 +10,10 @@ import javax.persistence.PersistenceContext;
 import javax.sql.DataSource;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
+import java.math.BigDecimal;
 import java.sql.Connection;
 
-public abstract class GenericDAO<T, ID extends Serializable>{
+public abstract class GenericDAO<T, ID extends Serializable> {
 
     @Resource
     private SessionContext ctxt;
@@ -20,15 +21,14 @@ public abstract class GenericDAO<T, ID extends Serializable>{
     protected Class<T> persistentClass = null;
 
     @PersistenceContext(unitName = GenericJTA.JTA)
-    private EntityManager em;
+    EntityManager em;
 
-    protected EntityManager getEntityManager(){
+    protected EntityManager getEntityManager() {
         return this.em;
     }
 
     /**
      * Obtém classe do parametro estático que generaliza para generalização da classe
-     *
      */
     @SuppressWarnings("unchecked")
     protected GenericDAO() {
@@ -46,7 +46,7 @@ public abstract class GenericDAO<T, ID extends Serializable>{
     /**
      * Retorna a sessão do hibernate.
      */
-    private Object getSession(){
+    private Object getSession() {
         return getEntityManager().getDelegate();
     }
 
@@ -58,7 +58,7 @@ public abstract class GenericDAO<T, ID extends Serializable>{
         try {
             DataSource data = (DataSource) ctxt.lookup(dataSourceName);
             return data.getConnection();
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new AppException(Propriedades.getMensagem("erro.conexao"));
         }
     }
@@ -68,5 +68,15 @@ public abstract class GenericDAO<T, ID extends Serializable>{
      */
     protected Connection getConnection() throws AppException {
         return getConnection(Propriedades.getMensagem("MAIN_DATASOOURCE"));
+    }
+
+    /**
+     * Gerencia a geração de chave primária das tabelas relacionados a determinado esquema.
+     */
+    public Long getNextSequence(String sequenceName) {
+        String sql = "select srh." + sequenceName.toUpperCase() + ".nextval from dual";
+        return ((BigDecimal) getEntityManager()
+                .createNativeQuery(sql)
+                .getSingleResult()).longValue();
     }
 }
