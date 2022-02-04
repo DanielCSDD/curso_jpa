@@ -17,8 +17,10 @@ public class Configuracao implements Serializable {
     @OneToOne
     private Usuario usuario;
 
+    @Column(name = "receber_notificacoes_configuracao")
     private boolean receberNotificacoes;
 
+    @Column(name = "encerrar_sessao_automaticamente_configuracao")
     private boolean encerrarSessaoAutomaticamente;
 
     public Integer getId() {

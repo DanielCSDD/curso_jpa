@@ -13,3 +13,5 @@ insert into srh.usuario (id_usuario, nome_usuario, login_usuario, senha_usuario,
 insert into srh.usuario (id_usuario, nome_usuario, login_usuario, senha_usuario, dominio_id_dominio, ultimoAcesso_usuario) values (3, 'Ria Torres', 'ria', '123', 1, CURRENT_DATE);
 insert into srh.usuario (id_usuario, nome_usuario, login_usuario, senha_usuario, dominio_id_dominio, ultimoAcesso_usuario) values (4, 'Eli Locker', 'eli', '123', 1, CURRENT_DATE);
 insert into srh.usuario (id_usuario, nome_usuario, login_usuario, senha_usuario, dominio_id_dominio, ultimoAcesso_usuario) values (5, 'Emily Lightman', 'emily', '123', 1, CURRENT_DATE);
+
+insert into srh.configuracao (usuario_id_usuario, receber_notificacoes_configuracao, encerrar_sessao_automaticamente_configuracao) values (1, false, false);

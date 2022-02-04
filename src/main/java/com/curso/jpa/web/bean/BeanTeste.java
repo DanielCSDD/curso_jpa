@@ -52,6 +52,46 @@ public class BeanTeste {
         carregarUsuarioProProjecao();
         carregarUsuarioProProjecaoDTO();
         carregarNomeUsuarios();
+        carregarUsuarioComDominioJoin();
+        carregarUsuarioComDominioLeftJoin();
+        carregarUsuarioComDominioFetchJoin();
+        carregarUsuarioComFiltro();
+        carregarUsuarioComFiltroOperadores();
+        carregarUsuarioComOperadorIn();
+        carregarUsuarioListaOrdenada();
+        carregarUsuarioComPaginacao();
+    }
+
+    private void carregarUsuarioComPaginacao() {
+        List<Usuario> usuarios = this.servicoUsuario.buscaUsuariosListaComPaginacao();
+    }
+
+    private void carregarUsuarioListaOrdenada() {
+        List<Usuario> usuarios = this.servicoUsuario.buscaUsuariosListaOrdenada();
+    }
+
+    private void carregarUsuarioComOperadorIn() {
+        List<Usuario> usuarios = this.servicoUsuario.buscaUsuariosComOperadorIn();
+    }
+
+    private void carregarUsuarioComFiltroOperadores() {
+        List<Usuario> usuarios = this.servicoUsuario.buscaUsuariosComFiltroOperadores();
+    }
+
+    private void carregarUsuarioComFiltro() {
+        List<Usuario> usuarios = this.servicoUsuario.buscaUsuariosComFiltro();
+    }
+
+    private void carregarUsuarioComDominioFetchJoin() {
+        List<Usuario> usuarios = this.servicoUsuario.buscaUsuariosComConfiguracaoFetchJoin();
+    }
+
+    private void carregarUsuarioComDominioLeftJoin() {
+        List<Object[]> usuarios = this.servicoUsuario.buscaUsuariosComConfiguracaoLeftJoin();
+    }
+
+    private void carregarUsuarioComDominioJoin() {
+        List<Usuario> usuarios = this.servicoUsuario.buscaUsuariosComDominioJoin();
     }
 
     private void carregarUsuarioProProjecaoDTO() {
