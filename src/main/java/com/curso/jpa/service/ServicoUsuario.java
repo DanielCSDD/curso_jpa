@@ -77,4 +77,32 @@ public class ServicoUsuario extends ServicoComum<Usuario, Long> {
     public List<Usuario> buscaUsuariosListaComPaginacao(){
         return this.dao.buscaUsuariosListaComPaginacao();
     }
+
+    public List<Usuario> buscaUsuariosListaComCriteriaQuery(){
+        return this.dao.buscaUsuariosListaComCriteriaQuery();
+    }
+
+    public List<String> buscaNomesUsuariosComCriteria(){
+        return this.dao.buscaNomesUsuariosComCriteria();
+    }
+
+    public List<Object[]> buscaPorProjecaoCriteria(){
+        return this.dao.buscaPorProjecaoCriteria();
+    }
+
+    public List<UsuarioDTO> buscaPorProjecaoDTOCriteria(){
+        return this.dao.buscaPorProjecaoDTOCriteria();
+    }
+
+    public Usuario buscaPorIdCriteria(Integer id){
+        return this.dao.buscaPorIdCriteria(id);
+    }
+
+    public List<Usuario> buscaUsuariosListaOrdenadaCriteria(){
+        return this.dao.buscaUsuariosListaOrdenadaCriteria();
+    }
+
+    public List<Usuario> buscaUsuariosListaComPaginacaoCriteria(){
+        return this.dao.buscaUsuariosListaComPaginacaoCriteria();
+    }
 }

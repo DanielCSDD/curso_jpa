@@ -7,6 +7,7 @@ import com.curso.jpa.service.generico.ServicoComum;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import java.util.List;
 
 @Stateless
 public class ServicoDominio extends ServicoComum<Dominio, Long> {
@@ -21,5 +22,9 @@ public class ServicoDominio extends ServicoComum<Dominio, Long> {
 
     public Dominio buscaPorUsuario(Integer id){
         return this.dao.buscaPorUsuario(id);
+    }
+
+    public List<Dominio> buscaDominiosPorUsuarioComCriteriaQuery(){
+        return this.dao.buscaDominiosPorUsuarioComCriteriaQuery();
     }
 }

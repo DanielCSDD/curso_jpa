@@ -7,11 +7,14 @@ import javax.annotation.Resource;
 import javax.ejb.SessionContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import javax.sql.DataSource;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.math.BigDecimal;
 import java.sql.Connection;
+import java.util.List;
 
 public abstract class GenericDAO<T, ID extends Serializable> {
 
@@ -19,6 +22,8 @@ public abstract class GenericDAO<T, ID extends Serializable> {
     private SessionContext ctxt;
 
     protected Class<T> persistentClass = null;
+
+    private CriteriaBuilder criteriaBuilder;
 
     @PersistenceContext(unitName = GenericJTA.JTA)
     EntityManager em;
@@ -78,5 +83,14 @@ public abstract class GenericDAO<T, ID extends Serializable> {
         return ((BigDecimal) getEntityManager()
                 .createNativeQuery(sql)
                 .getSingleResult()).longValue();
+    }
+
+    /**
+     * Listar generico utilizando critéria
+     */
+    public List<T> listar(){
+            CriteriaQuery<T> consulta = getEntityManager().getCriteriaBuilder().createQuery(this.persistentClass);
+            consulta.from(this.persistentClass);
+            return getEntityManager().createQuery(consulta).getResultList();
     }
 }

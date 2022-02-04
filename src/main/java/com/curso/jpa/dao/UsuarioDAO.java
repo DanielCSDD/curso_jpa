@@ -7,12 +7,17 @@ import com.curso.jpa.model.Usuario;
 import javax.ejb.Stateless;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
 @Stateless
 public class UsuarioDAO extends GenericDAO<Usuario, Long> {
+
+    private CriteriaBuilder criteriaBuilder;
 
     /**
      * Consultando tabela: USUARIO retorna uma lista de usuários.
@@ -158,4 +163,88 @@ public class UsuarioDAO extends GenericDAO<Usuario, Long> {
         return query.getResultList();
     }
 
+    /**
+     * Consultando tabela: USUARIO com CriteriaQuery
+     */
+    public List<Usuario> buscaUsuariosListaComCriteriaQuery(){
+        return listar();
+    }
+
+    /**
+     * Consultando tabela: USUARIO retonando nomes utilizando CRITERIA
+     */
+    public List<String> buscaNomesUsuariosComCriteria(){
+        this.criteriaBuilder = getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<String> query = this.criteriaBuilder.createQuery(String.class);
+        Root<Usuario> root = query.from(Usuario.class);
+        query.select(root.get("nome"));
+        TypedQuery<String> typedQuery = getEntityManager().createQuery(query);
+        return typedQuery.getResultList();
+    }
+
+    /**
+     * Consultando tabela: USUARIO por projeção utilizando Lista de objetos baseando-se em CRITERIA
+     */
+    public List<Object[]> buscaPorProjecaoCriteria(){
+        this.criteriaBuilder = getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<Object[]> query = this.criteriaBuilder.createQuery(Object[].class);
+        Root<Usuario> root = query.from(Usuario.class);
+        query.multiselect(root.get("id"), root.get("login"), root.get("senha"));
+
+        TypedQuery<Object[]> typedQuery = getEntityManager().createQuery(query);
+        return typedQuery.getResultList();
+    }
+
+    /**
+     * Consultando tabela: USUARIO por projeção utilizando classe DTO utilizando-se CRITERIA
+     */
+    public List<UsuarioDTO> buscaPorProjecaoDTOCriteria(){
+        this.criteriaBuilder = getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<UsuarioDTO> query = this.criteriaBuilder.createQuery(UsuarioDTO.class);
+        Root<Usuario> root = query.from(Usuario.class);
+        query.select(this.criteriaBuilder.construct(UsuarioDTO.class, root.get("id"), root.get("login"), root.get("nome")));
+        TypedQuery<UsuarioDTO> typedQuery = getEntityManager().createQuery(query);
+        return typedQuery.getResultList();
+    }
+
+    /**
+     * Consultando tabela: USUARIO por parâmetro CRITERIA
+     */
+    public Usuario buscaPorIdCriteria(Integer id){
+        this.criteriaBuilder = getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<Usuario> query = this.criteriaBuilder.createQuery(Usuario.class);
+        Root<Usuario> root = query.from(Usuario.class);
+        query.select(root);
+        query.where(this.criteriaBuilder.equal(root.get("id"), id));
+        TypedQuery<Usuario> typedQuery = getEntityManager().createQuery(query);
+        return typedQuery.getSingleResult();
+    }
+
+    /**
+     * Consultando tabela: USUARIO ordenando resultado CRITERIA
+     */
+    public List<Usuario> buscaUsuariosListaOrdenadaCriteria(){
+        this.criteriaBuilder = getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<Usuario> query = this.criteriaBuilder.createQuery(Usuario.class);
+        Root<Usuario> root = query.from(Usuario.class);
+        query.select(root);
+        query.orderBy(this.criteriaBuilder.asc(root.get("nome")));
+        TypedQuery<Usuario> typedQuery = getEntityManager().createQuery(query);
+        return typedQuery.getResultList();
+    }
+
+    /**
+     * Consultando tabela: USUARIO com paginação CRITERIA
+     */
+    public List<Usuario> buscaUsuariosListaComPaginacaoCriteria(){
+        this.criteriaBuilder = getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<Usuario> query = this.criteriaBuilder.createQuery(Usuario.class);
+        Root<Usuario> root = query.from(Usuario.class);
+        query.select(root);
+
+        TypedQuery<Usuario> typedQuery = getEntityManager().createQuery(query)
+                .setFirstResult(2)
+                .setMaxResults(2);
+        return typedQuery.getResultList();
+    }
 }

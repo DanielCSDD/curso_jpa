@@ -30,15 +30,20 @@ public class BeanTeste {
 
     public void init() {
         if (!executou) {
-            cliente();
+//            cliente();
             usuario();
-            dominio();
+//            dominio();
             executou = true;
         }
     }
 
     private void dominio() {
         carregarDominioPorUsuario();
+        carregarDominioPorUsuarioComCriteriaQuery();
+    }
+
+    private void carregarDominioPorUsuarioComCriteriaQuery() {
+        List<Dominio> dominios = this.servicoDominio.buscaDominiosPorUsuarioComCriteriaQuery();
     }
 
     private void carregarDominioPorUsuario() {
@@ -46,20 +51,55 @@ public class BeanTeste {
     }
 
     private void usuario() {
-        carregarListaUsuarios();
-        carregarUsuarioConsultaSemTipo();
-        carregarUsuario();
-        carregarUsuarioProProjecao();
-        carregarUsuarioProProjecaoDTO();
-        carregarNomeUsuarios();
-        carregarUsuarioComDominioJoin();
-        carregarUsuarioComDominioLeftJoin();
-        carregarUsuarioComDominioFetchJoin();
-        carregarUsuarioComFiltro();
-        carregarUsuarioComFiltroOperadores();
-        carregarUsuarioComOperadorIn();
-        carregarUsuarioListaOrdenada();
-        carregarUsuarioComPaginacao();
+//        carregarListaUsuarios();
+//        carregarUsuarioConsultaSemTipo();
+//        carregarUsuario();
+//        carregarUsuarioProProjecao();
+//        carregarUsuarioProProjecaoDTO();
+//        carregarNomeUsuarios();
+//        carregarUsuarioComDominioJoin();
+//        carregarUsuarioComDominioLeftJoin();
+//        carregarUsuarioComDominioFetchJoin();
+//        carregarUsuarioComFiltro();
+//        carregarUsuarioComFiltroOperadores();
+//        carregarUsuarioComOperadorIn();
+//        carregarUsuarioListaOrdenada();
+//        carregarUsuarioComPaginacao();
+//        carregarUsuarioComCriteriaQuery();
+//        carregarNomesUsuarioComCriteriaQuery();
+//        carregarUsuarioProProjecaoCriteriaQuery();
+//        carregarUsuarioProProjecaoDTOCriteriaQuery();
+//        carregarUsuarioCriteria();
+//        carregarUsuarioListaOrdenadaCriteria();
+        carregarUsuarioComPaginacaoCriteria();
+    }
+
+    private void carregarUsuarioComPaginacaoCriteria() {
+        List<Usuario> usuarios = this.servicoUsuario.buscaUsuariosListaComPaginacaoCriteria();
+    }
+
+    private void carregarUsuarioListaOrdenadaCriteria() {
+        List<Usuario> usuarios = this.servicoUsuario.buscaUsuariosListaOrdenadaCriteria();
+    }
+
+    private void carregarUsuarioCriteria() {
+        Usuario usuario = this.servicoUsuario.buscaPorIdCriteria(1);
+    }
+
+    private void carregarUsuarioProProjecaoDTOCriteriaQuery() {
+        List<UsuarioDTO> usuarios = this.servicoUsuario.buscaPorProjecaoDTOCriteria();
+    }
+
+    private void carregarUsuarioProProjecaoCriteriaQuery() {
+        List<Object[]> usuarios = this.servicoUsuario.buscaPorProjecaoCriteria();
+    }
+
+    private void carregarNomesUsuarioComCriteriaQuery() {
+        List<String> usuarios = this.servicoUsuario.buscaNomesUsuariosComCriteria();
+    }
+
+    private void carregarUsuarioComCriteriaQuery() {
+        List<Usuario> usuarios = this.servicoUsuario.buscaUsuariosListaComCriteriaQuery();
     }
 
     private void carregarUsuarioComPaginacao() {
