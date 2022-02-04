@@ -1,15 +1,16 @@
-package com.curso.jpa.service.generico;
+package com.curso.jpa.service;
 
 import com.curso.jpa.dao.ClienteDAO;
 import com.curso.jpa.dao.generico.GenericDAO;
 import com.curso.jpa.model.Cliente;
+import com.curso.jpa.service.generico.ServicoComum;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import java.util.List;
 
 @Stateless
-public class ServicoCliente extends ServicoComum<Cliente, Long>{
+public class ServicoCliente extends ServicoComum<Cliente, Long> {
 
     @EJB
     private ClienteDAO dao;
