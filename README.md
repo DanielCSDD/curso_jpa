@@ -1,1 +1,1 @@
-# curso_jsf
+# curso_jpa

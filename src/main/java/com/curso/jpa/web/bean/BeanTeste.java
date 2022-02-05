@@ -3,10 +3,13 @@ package com.curso.jpa.web.bean;
 import com.curso.jpa.dto.UsuarioDTO;
 import com.curso.jpa.model.Cliente;
 import com.curso.jpa.model.Dominio;
+import com.curso.jpa.model.Funcionario;
 import com.curso.jpa.model.Usuario;
 import com.curso.jpa.service.ServicoCliente;
 import com.curso.jpa.service.ServicoDominio;
+import com.curso.jpa.service.ServicoFuncionario;
 import com.curso.jpa.service.ServicoUsuario;
+import com.curso.jpa.web.bean.auxiliar.Sessao;
 
 import javax.annotation.ManagedBean;
 import javax.ejb.EJB;
@@ -26,15 +29,58 @@ public class BeanTeste {
     @EJB
     private ServicoDominio servicoDominio;
 
+    @EJB
+    private ServicoFuncionario servicoFuncionario;
+
     private static boolean executou;
 
     public void init() {
         if (!executou) {
 //            cliente();
-            usuario();
+//            usuario();
 //            dominio();
+            funcionario();
             executou = true;
         }
+    }
+
+    private void funcionario() {
+        Funcionario funcionario1 = abrindoSessao();
+        Funcionario funcionario2 = abrindoSessao();
+
+        String sessao1 = "SESSAO_1";
+        String sessao2 = "SESSAO_2";
+
+        Sessao funcionarioSessao1 = new Sessao(sessao1, funcionario1);
+        funcionarioSessao1.setEditarNome("Roberto Carlos Pereira Silva");
+
+        Sessao funcionarioSessao2 = new Sessao(sessao2, funcionario2);
+        funcionarioSessao2.setEditarNome("Silvara Karter Silva");
+
+        funcionarioSessao1.setFuncionario(submeterFormulario(funcionarioSessao1));
+        funcionarioSessao2.setFuncionario(submeterFormulario(funcionarioSessao2));
+
+        verificarAtualizacao(funcionarioSessao1);
+        verificarAtualizacao(funcionarioSessao2);
+
+//        encerraSessao(funcionario2);
+    }
+
+    private void encerraSessao(Funcionario funcionario) {
+        this.servicoFuncionario.encerrandoSessao(funcionario);
+    }
+
+    public void verificarAtualizacao(Sessao sessao){
+        this.servicoFuncionario.verificaAtualizarDados(sessao);
+    }
+
+    public Funcionario submeterFormulario(Sessao sessao) {
+        sessao.getFuncionario().setNome(sessao.getEditarNome());
+        return this.servicoFuncionario.atualizarDados(sessao);
+    }
+
+    private Funcionario abrindoSessao() {
+        return this.servicoFuncionario.abreSessaoFuncionario();
     }
 
     private void dominio() {
@@ -51,26 +97,26 @@ public class BeanTeste {
     }
 
     private void usuario() {
-//        carregarListaUsuarios();
-//        carregarUsuarioConsultaSemTipo();
-//        carregarUsuario();
-//        carregarUsuarioProProjecao();
-//        carregarUsuarioProProjecaoDTO();
-//        carregarNomeUsuarios();
-//        carregarUsuarioComDominioJoin();
-//        carregarUsuarioComDominioLeftJoin();
-//        carregarUsuarioComDominioFetchJoin();
-//        carregarUsuarioComFiltro();
-//        carregarUsuarioComFiltroOperadores();
-//        carregarUsuarioComOperadorIn();
-//        carregarUsuarioListaOrdenada();
-//        carregarUsuarioComPaginacao();
-//        carregarUsuarioComCriteriaQuery();
-//        carregarNomesUsuarioComCriteriaQuery();
-//        carregarUsuarioProProjecaoCriteriaQuery();
-//        carregarUsuarioProProjecaoDTOCriteriaQuery();
-//        carregarUsuarioCriteria();
-//        carregarUsuarioListaOrdenadaCriteria();
+        carregarListaUsuarios();
+        carregarUsuarioConsultaSemTipo();
+        carregarUsuario();
+        carregarUsuarioProProjecao();
+        carregarUsuarioProProjecaoDTO();
+        carregarNomeUsuarios();
+        carregarUsuarioComDominioJoin();
+        carregarUsuarioComDominioLeftJoin();
+        carregarUsuarioComDominioFetchJoin();
+        carregarUsuarioComFiltro();
+        carregarUsuarioComFiltroOperadores();
+        carregarUsuarioComOperadorIn();
+        carregarUsuarioListaOrdenada();
+        carregarUsuarioComPaginacao();
+        carregarUsuarioComCriteriaQuery();
+        carregarNomesUsuarioComCriteriaQuery();
+        carregarUsuarioProProjecaoCriteriaQuery();
+        carregarUsuarioProProjecaoDTOCriteriaQuery();
+        carregarUsuarioCriteria();
+        carregarUsuarioListaOrdenadaCriteria();
         carregarUsuarioComPaginacaoCriteria();
     }
 
