@@ -65,6 +65,14 @@
             <version>42.3.0</version>
         </dependency>
         <!-- DEPENDENCIA BANCO DE DADOS - FIM -->
+
+        <!-- https://mvnrepository.com/artifact/org.jboss.spec.javax.transaction/jboss-transaction-api_1.3_spec -->
+        <dependency>
+            <groupId>org.jboss.spec.javax.transaction</groupId>
+            <artifactId>jboss-transaction-api_1.3_spec</artifactId>
+            <version>2.0.0.Final</version>
+        </dependency>
+
     </dependencies>
 
     <build>

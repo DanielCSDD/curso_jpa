@@ -31,8 +31,4 @@ public class ServicoFuncionario extends ServicoComum<Funcionario, Long> {
     public void verificaAtualizarDados(Sessao funcionario){
         this.dao.verificaAtualizarDados(funcionario);
     }
-
-    public void encerrandoSessao(Funcionario funcionario){
-        this.dao.encerrandoSessao(funcionario);
-    }
 }

@@ -21,3 +21,5 @@ insert into srh.funcionario (id_funcionario, versao_funcionario, nome_funcionari
 insert into srh.funcionario (id_funcionario, versao_funcionario, nome_funcionario, banco_horas_funcionario, salario_funcionario, valor_hora_extra_funcionario) values (3, 0, 'Ricardo Gomes dos Santos', 98, 5360.00, 12.00);
 insert into srh.funcionario (id_funcionario, versao_funcionario, nome_funcionario, banco_horas_funcionario, salario_funcionario, valor_hora_extra_funcionario) values (4, 0, 'Flávia Catarina Nunes', 32, 5360.00, 12.00);
 insert into srh.funcionario (id_funcionario, versao_funcionario, nome_funcionario, banco_horas_funcionario, salario_funcionario, valor_hora_extra_funcionario) values (5, 0, 'Gabriel dos Santos Menezes', 24, 5360.00, 12.00);
+
+insert into srh.artigo (id_artigo, titulo_artigo, conteudo_artigo) values (1, 'Título do artigo', 'Conteúdo do artigo');

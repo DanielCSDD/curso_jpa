@@ -54,11 +54,4 @@ public class FuncionarioDAO extends GenericDAO<Funcionario, Long> {
                     " eu tenho certeza que coloquei " + sessao.getEditarNome());
         }
     }
-
-    /**
-     * Simulação de fechamento de sessão de usuario.
-     */
-    public void encerrandoSessao(Funcionario funcionario){
-//        funcionario.getEntityManager().close();
-    }
 }

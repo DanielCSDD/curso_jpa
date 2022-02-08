@@ -1,23 +1,18 @@
 package com.curso.jpa.web.bean;
 
 import com.curso.jpa.dto.UsuarioDTO;
-import com.curso.jpa.model.Cliente;
-import com.curso.jpa.model.Dominio;
-import com.curso.jpa.model.Funcionario;
-import com.curso.jpa.model.Usuario;
-import com.curso.jpa.service.ServicoCliente;
-import com.curso.jpa.service.ServicoDominio;
-import com.curso.jpa.service.ServicoFuncionario;
-import com.curso.jpa.service.ServicoUsuario;
+import com.curso.jpa.model.*;
+import com.curso.jpa.service.*;
 import com.curso.jpa.web.bean.auxiliar.Sessao;
 
 import javax.annotation.ManagedBean;
-import javax.ejb.EJB;
+import javax.ejb.*;
 import javax.inject.Named;
 import java.util.List;
 
 @Named
 @ManagedBean
+//@TransactionManagement(javax.ejb.TransactionManagementType.BEAN)
 public class BeanTeste {
 
     @EJB
@@ -32,6 +27,9 @@ public class BeanTeste {
     @EJB
     private ServicoFuncionario servicoFuncionario;
 
+    @EJB
+    private ServicoArtigo servicoArtigo;
+
     private static boolean executou;
 
     public void init() {
@@ -39,9 +37,38 @@ public class BeanTeste {
 //            cliente();
 //            usuario();
 //            dominio();
-            funcionario();
+//            funcionario();
+            artigo();
             executou = true;
         }
+    }
+
+    private void artigo() {
+        Artigo artigo1 = this.servicoArtigo.buscarArtigo();
+        artigo1.setNomeEditor("João");
+        artigo1.setConteudo(" Artigo atualizado " + artigo1.getNomeEditor());
+        artigo1.setNumThread(1);
+        Artigo artigo2 = this.servicoArtigo.buscarArtigo();
+        artigo2.setNomeEditor("Maria");
+        artigo2.setConteudo(" Artigo atualizado " + artigo2.getNomeEditor());
+        artigo2.setNumThread(2);
+
+        casoMaisPratico(artigo2);
+        casoMaisPratico(artigo1);
+//        javaEOBancoDados(artigo2);
+//        javaEOBancoDados(artigo1);
+    }
+
+    public void casoMaisPratico(Artigo artigo){
+        this.servicoArtigo.casoMaisPratico(artigo);
+    }
+
+    private void javaEOBancoDados(Artigo artigo) {
+        this.servicoArtigo.javaEOBancoDados(artigo);
+    }
+
+    private Artigo alterarArtigo(Artigo artigo) {
+        return this.servicoArtigo.alterar(artigo);
     }
 
     private void funcionario() {
@@ -62,14 +89,8 @@ public class BeanTeste {
 
         verificarAtualizacao(funcionarioSessao1);
         verificarAtualizacao(funcionarioSessao2);
-
-//        encerraSessao(funcionario2);
     }
-
-    private void encerraSessao(Funcionario funcionario) {
-        this.servicoFuncionario.encerrandoSessao(funcionario);
-    }
-
+    
     public void verificarAtualizacao(Sessao sessao){
         this.servicoFuncionario.verificaAtualizarDados(sessao);
     }
